@@ -22,6 +22,7 @@
                 </div>
             </div>
         </div>
+<ShoppingCart />
     </div>
 </template>
 
@@ -57,6 +58,16 @@ photoURL: 'https://picsum.photos/500/500/?image=54'
 shoppingCart: []
 }
 },
+ mounted() {
+        this.shoppingCart = JSON.parse(localStorage.getItem('shoppingCart') || "[]")
+    },
+    watch: {
+        shoppingCart: {
+            handler(newValue) {
+                localStorage.setItem('shoppingCart', JSON.stringify(newValue));
+            }, deep: true
+        }
+    },
 methods: {
         addToCart(product) {
             let exists = false;
